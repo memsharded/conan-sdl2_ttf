@@ -41,7 +41,7 @@ class SDL2TTfConan(ConanFile):
     def build_with_vs(self):
         env = ConfigureEnvironment(self.deps_cpp_info, self.settings)
         
-        env_line = env.comman_line.replace("%%CL%%", '')
+        env_line = env.command_line.replace("%%CL%%", '')
 
         libdirs="<AdditionalLibraryDirectories>"
         libdirs_ext="<AdditionalLibraryDirectories>$(LIB);"
