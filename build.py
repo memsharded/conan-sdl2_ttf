@@ -2,7 +2,7 @@ from conan.packager import ConanMultiPackager
 import platform
 
 if __name__ == "__main__":
-    builder = ConanMultiPackager()
+    builder = ConanMultiPackager(args="--build missing")
     builder.add_common_builds(pure_c=True, shared_option_name="SD2_ttf:shared")
     x86_64_builds = []
     for build in builder.builds: # Problems installing native GL libs for x86
