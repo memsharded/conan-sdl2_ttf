@@ -40,6 +40,8 @@ class SDL2TTfConan(ConanFile):
 
     def build_with_vs(self):
         env = ConfigureEnvironment(self.deps_cpp_info, self.settings)
+        
+        env_line = env.comman_line.replace("%%CL%%", '')
 
         libdirs="<AdditionalLibraryDirectories>"
         libdirs_ext="<AdditionalLibraryDirectories>$(LIB);"
@@ -52,10 +54,10 @@ class SDL2TTfConan(ConanFile):
 
         vcvars_cmd = vcvars_command(self.settings)
         cd_build = "cd %s\VisualC" % self.folder
-        command = "%s && %s && %s && devenv SDL_ttf.sln /upgrade" % (vcvars_cmd, cd_build, env.command_line)
+        command = "%s && %s && %s && devenv SDL_ttf.sln /upgrade" % (vcvars_cmd, cd_build, env_line)
         self.output.warn(command)
         self.run(command)
-        self.run("%s && %s && %s && msbuild SDL_ttf.sln" % (vcvars_cmd, cd_build, env.command_line))
+        self.run("%s && %s && %s && msbuild SDL_ttf.sln" % (vcvars_cmd, cd_build, env_line))
 
     def build_with_make(self):
         
