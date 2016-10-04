@@ -52,11 +52,10 @@ class SDL2TTfConan(ConanFile):
 
         vcvars_cmd = vcvars_command(self.settings)
         cd_build = "cd %s\VisualC" % self.folder
-        env_line = env.command_line.replace("%CL%", "cl")
-        command = "%s && %s && %s && devenv SDL_ttf.sln /upgrade" % (vcvars_cmd, cd_build, env_line)
+        command = "%s && %s && %s && devenv SDL_ttf.sln /upgrade" % (vcvars_cmd, cd_build, env.command_line)
         self.output.warn(command)
         self.run(command)
-        self.run("%s && %s && %s && msbuild SDL_ttf.sln" % (vcvars_cmd, cd_build, env_line))
+        self.run("%s && %s && %s && msbuild SDL_ttf.sln" % (vcvars_cmd, cd_build, env.command_line))
 
     def build_with_make(self):
         
